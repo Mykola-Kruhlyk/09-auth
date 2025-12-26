@@ -12,9 +12,9 @@ if (typeof window !== 'undefined') {
           'We are cleaning up async info that was not on the parent Suspense boundary'
         )
       ) {
-        return; // ігноруємо цей warning
+        return; 
       }
-      // Все інше залишаємо
+      
       originalConsoleError(...args);
     };
   } catch (err) {

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { QueryClient, HydrationBoundary, dehydrate } from '@tanstack/react-query';
-import { fetchNotesByTag } from '@/lib/actions';
+import { fetchNotes } from '@/lib/api/serverApi';
 import NotesClient from './Notes.client';
 
 interface PageProps {
@@ -31,15 +31,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function FilteredNotesPage({ params }: PageProps) {
   const { slug } = await params;
   const tag = slug[0];
-  const queryTag = tag === 'all' ? 'all' : tag;
+  const queryTag = tag === 'all' ? '' : tag;
 
   const queryClient = new QueryClient();
 
   try {
     await queryClient.prefetchQuery({
-      queryKey: ['notes', queryTag, ''],
+      queryKey: ['notes', queryTag, 1, ''],
       queryFn: () =>
-        fetchNotesByTag(queryTag === 'all' ? '' : queryTag),
+        fetchNotes({
+          tag: queryTag,
+          page: 1,
+          perPage: 6,
+        }),
     });
   } catch (error) {
     console.error('Prefetch notes failed:', error);

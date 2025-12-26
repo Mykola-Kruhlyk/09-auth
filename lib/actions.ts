@@ -1,5 +1,5 @@
 // lib/actions.ts
-import { api } from './api';
+import { api } from './api/api';
 import { Note } from '@/types/note';
 
 export interface NotesResponse {

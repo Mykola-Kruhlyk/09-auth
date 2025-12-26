@@ -2,8 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import { fetchNotesByTag } from '@/lib/actions';
-import { Note } from '@/types/note';
+import { fetchNotes } from '@/lib/api/clientApi';
 import { useDebounce } from '@/lib/hooks/useDebounce';
 import NoteList from '@/components/NoteList/NoteList';
 import Pagination from '@/components/Pagination/Pagination';
@@ -21,7 +20,6 @@ export default function NotesClient({ tag }: NotesClientProps) {
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
 
-  // Скидання сторінки на 1 при зміні пошукового запиту
   useEffect(() => {
     setPage(1);
   }, [debouncedSearch]);
@@ -29,7 +27,12 @@ export default function NotesClient({ tag }: NotesClientProps) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['notes', tag, page, debouncedSearch],
     queryFn: () =>
-      fetchNotesByTag(tag, page, PER_PAGE, debouncedSearch),
+      fetchNotes({
+        tag: tag || undefined,
+        page,
+        perPage: PER_PAGE,
+        search: debouncedSearch || undefined,
+      }),
     placeholderData: {
       notes: [],
       totalPages: 1,

@@ -1,5 +1,5 @@
 {
-  "name": "08-zustand",
+  "name": "09-auth",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,21 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/font": "^14.2.15",
     "@tanstack/react-query": "^5.90.12",
-    "axios": "^1.13.2",
+    "axios": "^1.7.9",
+    "clsx": "^2.1.1",
+    "cookie": "^1.1.1",
+    "dotenv": "^17.2.3",
     "next": "^15.5.9",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
+    "react-icons": "^5.5.0",
     "use-debounce": "^10.0.6",
     "zustand": "^5.0.9"
   },
   "devDependencies": {
-    "@types/axios": "^0.9.36",
+    "@types/cookie": "^0.6.0",
     "@types/node": "^20.19.27",
     "@types/react": "^19.2.7",
-    "@types/react-dom": "^19",
+    "@types/react-dom": "^19.2.3",
     "eslint": "^8",
     "eslint-config-next": "^15.5.9",
-    "typescript": "^5"
+    "typescript": "^5.9.3"
   }
 }
